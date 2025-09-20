@@ -32,3 +32,14 @@ export async function POST(request) {
     );
   }
 }
+import dbConnect from "@/lib/mongodb";
+
+export default async function handler(req, res) {
+  try {
+    await dbConnect();
+    res.status(200).json({ message: "✅ Conectado a MongoDB Atlas" });
+  } catch (error) {
+    console.error("❌ Error al conectar:", error);
+    res.status(500).json({ error: "Error al conectar con la base de datos" });
+  }
+}
